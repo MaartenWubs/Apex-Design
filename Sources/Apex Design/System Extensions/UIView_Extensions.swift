@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    public func addConstraintsWithFormat(_ format: String, views: UIView...) {
+    public func addConstraintsWithFormat(_ format: String, views: [UIView]) {
             //
             // This methods is a shrunken down verion of the "addConstraints" method
             // to make code more easily readable.

@@ -9,34 +9,65 @@ import Foundation
 import CoreGraphics
 import UIKit
 
+/// Apex Button
+///
+/// A Control that executes your custom code in response to user
+/// interactions.
 public class APXButton: UIButton {
     
     private var button_title: String
     private var button_color: UIColor
     private var button_icon: String?
     private var button_style: ApexButtonStyle
+    private var button_action_to_perfom: UIAction
     
+    /// Creates a new button with the specified title, icon, color, style and action. This is
+    /// the extended version of the Apex Button
+    /// - Parameters:
+    ///   - buttonTitle: a string with the displayed title
+    ///   - buttonIcon: a string as reference to the icon shown in front
+    ///   of the button title
+    ///   - color: The accent color of the button. This defaults to the Apex
+    ///   default color
+    ///   - buttonStyle: The style that the button displays. This defaults to a standard
+    ///   filled button if no value is provided.
+    ///   - action: The action to perform when the button is slected.
     public init(buttonTitle: String,
                 buttonIcon: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard) {
+                buttonStyle: ApexButtonStyle = .standard,
+                action: UIAction) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_icon = buttonIcon
         self.button_style = buttonStyle
         
+        self.button_action_to_perfom = action
+        
         super.init(frame: .zero)
-        makeView()
+        makeViewWithImage()
     }
     
+    /// Creates a new button with the specified title, color, style and action. This is a title
+    /// only version of the button and doesn't show any icon.
+    /// - Parameters:
+    ///   - buttonTitle: a string the displayed text.
+    ///   - color: The accent color for the button. This defaults to the Apex
+    ///   default color if no value is provided.
+    ///   - buttonStyle: The style that the button displays. This defaults to a standard
+    ///   filled button if no value is provided.
+    ///   - action: The action to perform when the button is selected.
     public init(buttonTitle: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard) {
+                buttonStyle: ApexButtonStyle = .standard,
+                action: UIAction) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_style = buttonStyle
+        
+        self.button_action_to_perfom = action
         
         super.init(frame: .zero)
         makeView()
@@ -45,18 +76,18 @@ public class APXButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var text_label: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
 }
 
 extension APXButton {
     private func makeView() {
         translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = button_color
-        text_label.text = button_title
+        self.setTitle(button_title, for: .normal)
+        self.addAction(button_action_to_perfom, for: .touchUpInside)
+    }
+    
+    private func makeViewWithImage() {
+        makeView()
+        self.setImage(UIImage(systemName: button_icon!), for: .normal)
     }
 }
+
