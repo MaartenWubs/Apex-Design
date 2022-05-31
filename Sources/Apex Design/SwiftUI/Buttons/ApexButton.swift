@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 import CoreGraphics
 
-/// <#Description#>
+/// Apex Button
+///
+/// A Control that executes your custom code in response to user
+/// interactions.
 public struct ApexButton {
     
     private var button_title: String?
@@ -23,13 +26,14 @@ public struct ApexButton {
 
 extension ApexButton {
     
-    /// <#Description#>
+    /// Creates a new button with the specified title, icon, color, style and action. This is
+    /// the extended version of the Apex Button
     /// - Parameters:
-    ///   - buttonStyle: <#buttonStyle description#>
-    ///   - buttonColor: <#buttonColor description#>
-    ///   - text: <#text description#>
-    ///   - icon: <#icon description#>
-    ///   - action: <#action description#>
+    ///   - buttonStyle: The displayed style for the button.
+    ///   - buttonColor: The accent color for the button.
+    ///   - text: The displayed text for the button.
+    ///   - icon: The icon that is displayed infront of the text.
+    ///   - action: The action to perform.
     public init(buttonStyle: ApexButtonStyle = .standard,
                 buttonColor: Color = .apexDefaultColor,
                 text: String,
@@ -46,12 +50,13 @@ extension ApexButton {
         self.button_action_to_perform = action
     }
     
-    /// <#Description#>
+    /// Creates a new button with the specified icon, color, style and action. This is
+    /// the extended version of the Apex Button
     /// - Parameters:
-    ///   - buttonStyle: <#buttonStyle description#>
-    ///   - buttonColor: <#buttonColor description#>
-    ///   - icon: <#icon description#>
-    ///   - action: <#action description#>
+    ///   - buttonStyle: The displayed style for the button.
+    ///   - buttonColor: The accent color for the button.
+    ///   - icon: The displayed Icon for the button.
+    ///   - action: The action to perfrom.
     public init(buttonStyle: ApexButtonStyle = .standard,
                 buttonColor: Color = .apexDefaultColor,
                 icon: String,
