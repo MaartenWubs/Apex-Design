@@ -10,7 +10,7 @@ import SwiftUI
 import CoreGraphics
 
 /// <#Description#>
-struct ApexButton {
+public struct ApexButton {
     
     private var button_title: String?
     private var icon_image_name: String?
@@ -70,24 +70,21 @@ extension ApexButton {
 }
 
 extension ApexButton: View {
-    var body: some View {
+    public var body: some View {
         if button_style == .standard {
-            Button  {
-                button_action_to_perform()
+            Button {
+                self.button_action_to_perform()
             } label: {
                 HStack {
-                    if icon_image_name != nil {
-                        Image(systemName: icon_image_name!)
+                    if self.icon_image_name != nil {
+                        Image(systemName: self.icon_image_name!)
                     }
-                    if button_title != nil {
-                        Text(button_title!)
+                    if self.button_title != nil {
+                        Text(self.button_title!)
                     }
                 }
             }
-            .background(button_accent_color)
-            .foregroundColor(.white)
-            .apexFilledStyle(withColor: button_accent_color, size: button_size)
-            
+            .apexFilledStyle(withColor: self.button_accent_color, size: self.button_size)
         } else {
             Text("Work in Progress")
         }
