@@ -9,8 +9,11 @@ import Foundation
 import SwiftUI
 import CoreGraphics
 
-/// <#Description#>
-struct ApexButton {
+/// Apex Button
+///
+/// A Control that executes your custom code in response to user
+/// interactions.
+public struct ApexButton {
     
     private var button_title: String?
     private var icon_image_name: String?
@@ -23,13 +26,14 @@ struct ApexButton {
 
 extension ApexButton {
     
-    /// <#Description#>
+    /// Creates a new button with the specified title, icon, color, style and action. This is
+    /// the extended version of the Apex Button
     /// - Parameters:
-    ///   - buttonStyle: <#buttonStyle description#>
-    ///   - buttonColor: <#buttonColor description#>
-    ///   - text: <#text description#>
-    ///   - icon: <#icon description#>
-    ///   - action: <#action description#>
+    ///   - buttonStyle: The displayed style for the button.
+    ///   - buttonColor: The accent color for the button.
+    ///   - text: The displayed text for the button.
+    ///   - icon: The icon that is displayed infront of the text.
+    ///   - action: The action to perform.
     public init(buttonStyle: ApexButtonStyle = .standard,
                 buttonColor: Color = .apexDefaultColor,
                 text: String,
@@ -46,12 +50,13 @@ extension ApexButton {
         self.button_action_to_perform = action
     }
     
-    /// <#Description#>
+    /// Creates a new button with the specified icon, color, style and action. This is
+    /// the extended version of the Apex Button
     /// - Parameters:
-    ///   - buttonStyle: <#buttonStyle description#>
-    ///   - buttonColor: <#buttonColor description#>
-    ///   - icon: <#icon description#>
-    ///   - action: <#action description#>
+    ///   - buttonStyle: The displayed style for the button.
+    ///   - buttonColor: The accent color for the button.
+    ///   - icon: The displayed Icon for the button.
+    ///   - action: The action to perfrom.
     public init(buttonStyle: ApexButtonStyle = .standard,
                 buttonColor: Color = .apexDefaultColor,
                 icon: String,
@@ -70,24 +75,21 @@ extension ApexButton {
 }
 
 extension ApexButton: View {
-    var body: some View {
+    public var body: some View {
         if button_style == .standard {
-            Button  {
-                button_action_to_perform()
+            Button {
+                self.button_action_to_perform()
             } label: {
                 HStack {
-                    if icon_image_name != nil {
-                        Image(systemName: icon_image_name!)
+                    if self.icon_image_name != nil {
+                        Image(systemName: self.icon_image_name!)
                     }
-                    if button_title != nil {
-                        Text(button_title!)
+                    if self.button_title != nil {
+                        Text(self.button_title!)
                     }
                 }
             }
-            .background(button_accent_color)
-            .foregroundColor(.white)
-            .apexFilledStyle(withColor: button_accent_color, size: button_size)
-            
+            .apexFilledStyle(withColor: self.button_accent_color, size: self.button_size)
         } else {
             Text("Work in Progress")
         }
