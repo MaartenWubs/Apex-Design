@@ -29,7 +29,7 @@ extension UIView {
 
     public func makeCorners(_ radius: CGFloat, corners: UIRectCorner) {
         DispatchQueue.main.async {
-            let radii = CGSize (width: self.frame.width, height: radius)
+            let radii = CGSize (width: radius, height: radius)
             
             let maskPath = UIBezierPath(roundedRect: self.bounds,
                                         byRoundingCorners: corners,
