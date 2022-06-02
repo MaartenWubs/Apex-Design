@@ -85,7 +85,7 @@ extension APXButton {
             self.widthAnchor.constraint(equalToConstant: self.button_size.width)
         ])
         self.backgroundColor = button_color
-        self.makeCorners(self.button_size.height, corners: [.topLeft, .bottomRight])
+        self.makeCorners(self.button_size.height/2.7, corners: [.topLeft, .bottomRight])
         
     }
     
