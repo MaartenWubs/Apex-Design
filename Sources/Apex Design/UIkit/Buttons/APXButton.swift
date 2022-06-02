@@ -85,7 +85,6 @@ extension APXButton {
             self.widthAnchor.constraint(equalToConstant: self.button_size.width)
         ])
         self.backgroundColor = button_color
-        self.makeApexCorners(self.frame.height)
     }
     
     private func makeViewWithImage() {
