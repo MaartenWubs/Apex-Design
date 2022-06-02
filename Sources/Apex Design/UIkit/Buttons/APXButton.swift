@@ -19,6 +19,7 @@ public class APXButton: UIButton {
     private var button_color: UIColor
     private var button_icon: String?
     private var button_style: ApexButtonStyle
+    private var button_size: CGSize
     
     /// Creates a new button with the specified title, icon, color, style and action. This is
     /// the extended version of the Apex Button
@@ -34,12 +35,14 @@ public class APXButton: UIButton {
     public init(buttonTitle: String,
                 buttonIcon: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard) {
+                buttonStyle: ApexButtonStyle = .standard,
+                size: CGSize = CGSize(width: 140, height: 40)) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_icon = buttonIcon
         self.button_style = buttonStyle
+        self.button_size = size
         
         super.init(frame: .zero)
         makeViewWithImage()
@@ -56,11 +59,13 @@ public class APXButton: UIButton {
     ///   - action: The action to perform when the button is selected.
     public init(buttonTitle: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard) {
+                buttonStyle: ApexButtonStyle = .standard,
+                size: CGSize = CGSize(width: 140, height: 40)) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_style = buttonStyle
+        self.button_size = size
         
         super.init(frame: .zero)
         makeView()
@@ -75,6 +80,11 @@ extension APXButton {
     private func makeView() {
         translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(button_title, for: .normal)
+        NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: self.button_size.height),
+            self.widthAnchor.constraint(equalToConstant: self.button_size.width)
+        ])
+        self.backgroundColor = button_color
     }
     
     private func makeViewWithImage() {
