@@ -19,7 +19,6 @@ public class APXButton: UIButton {
     private var button_color: UIColor
     private var button_icon: String?
     private var button_style: ApexButtonStyle
-    private var button_action_to_perfom: UIAction
     
     /// Creates a new button with the specified title, icon, color, style and action. This is
     /// the extended version of the Apex Button
@@ -35,15 +34,12 @@ public class APXButton: UIButton {
     public init(buttonTitle: String,
                 buttonIcon: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard,
-                action: UIAction) {
+                buttonStyle: ApexButtonStyle = .standard) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_icon = buttonIcon
         self.button_style = buttonStyle
-        
-        self.button_action_to_perfom = action
         
         super.init(frame: .zero)
         makeViewWithImage()
@@ -60,14 +56,11 @@ public class APXButton: UIButton {
     ///   - action: The action to perform when the button is selected.
     public init(buttonTitle: String,
                 color: UIColor = .apexDefaultColor,
-                buttonStyle: ApexButtonStyle = .standard,
-                action: UIAction) {
+                buttonStyle: ApexButtonStyle = .standard) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_style = buttonStyle
-        
-        self.button_action_to_perfom = action
         
         super.init(frame: .zero)
         makeView()
@@ -82,7 +75,6 @@ extension APXButton {
     private func makeView() {
         translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(button_title, for: .normal)
-        self.addAction(button_action_to_perfom, for: .touchUpInside)
     }
     
     private func makeViewWithImage() {
