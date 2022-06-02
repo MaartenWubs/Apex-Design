@@ -40,6 +40,9 @@ extension UIView {
             
             self.layer.mask = mask
         }
-        
+    }
+    
+    public func makeApexCorners(withRadius radius: CGFloat) {
+        self.makeCorners(radius, corners: [.topLeft, .bottomRight])
     }
 }

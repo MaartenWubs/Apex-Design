@@ -37,8 +37,6 @@ fileprivate struct ApexCornerRadius: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .cornerRadius(radius/2.7, corners: [.topLeft, .bottomRight])
-            .cornerRadius(radius/4, corners: [.bottomLeft])
-            .cornerRadius(radius/50, corners: [.topRight])
     }
 }
 
