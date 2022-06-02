@@ -27,22 +27,19 @@ extension UIView {
                                                           views: viewsDict))
         }
 
-    fileprivate func makeCorners(_ radius: CGFloat, corners: UIRectCorner) {
-        let radii = CGSize (width: self.frame.width, height: radius)
+    public func makeCorners(_ radius: CGFloat, corners: UIRectCorner) {
+        DispatchQueue.main.async {
+            let radii = CGSize (width: self.frame.width, height: radius)
+            
+            let maskPath = UIBezierPath(roundedRect: self.bounds,
+                                        byRoundingCorners: corners,
+                                        cornerRadii: radii)
+            let mask = CAShapeLayer()
+            mask.path = maskPath.cgPath
+            mask.frame = self.bounds
+            
+            self.layer.mask = mask
+        }
         
-        let maskPath = UIBezierPath(roundedRect: self.bounds,
-                                    byRoundingCorners: corners,
-                                    cornerRadii: radii)
-        let mask = CAShapeLayer()
-        mask.path = maskPath.cgPath
-        mask.frame = self.bounds
-        
-        self.layer.mask = mask
-    }
-    
-    public func makeApexCorners(_ radius: CGFloat) {
-        self.makeCorners(radius/2.7, corners: [.topLeft, .bottomRight])
-        self.makeCorners(radius/4, corners: [.bottomLeft])
-        self.makeCorners(radius/50, corners: [.topRight])
     }
 }
