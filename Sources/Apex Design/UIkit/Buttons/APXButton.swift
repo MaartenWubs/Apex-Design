@@ -20,6 +20,7 @@ public class APXButton: UIButton {
     private var button_icon: String?
     private var button_style: ApexButtonStyle
     private var button_size: CGSize
+    private var button_action_to_perform: (() -> Void)
     
     /// Creates a new button with the specified title, icon, color, style and action. This is
     /// the extended version of the Apex Button
@@ -36,13 +37,15 @@ public class APXButton: UIButton {
                 buttonIcon: String,
                 color: UIColor = .apexDefaultColor,
                 buttonStyle: ApexButtonStyle = .standard,
-                size: CGSize = CGSize(width: 140, height: 40)) {
+                size: CGSize = CGSize(width: 140, height: 40),
+                action: @escaping (() -> Void)) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_icon = buttonIcon
         self.button_style = buttonStyle
         self.button_size = size
+        self.button_action_to_perform = action
         
         super.init(frame: .zero)
         makeViewWithImage()
@@ -60,12 +63,14 @@ public class APXButton: UIButton {
     public init(buttonTitle: String,
                 color: UIColor = .apexDefaultColor,
                 buttonStyle: ApexButtonStyle = .standard,
-                size: CGSize = CGSize(width: 140, height: 40)) {
+                size: CGSize = CGSize(width: 140, height: 40),
+                action: @escaping (() -> Void)) {
         
         self.button_title = buttonTitle
         self.button_color = color
         self.button_style = buttonStyle
         self.button_size = size
+        self.button_action_to_perform = action
         
         super.init(frame: .zero)
         makeView()
@@ -84,8 +89,9 @@ extension APXButton {
             self.heightAnchor.constraint(equalToConstant: self.button_size.height),
             self.widthAnchor.constraint(equalToConstant: self.button_size.width)
         ])
-        self.backgroundColor = button_color
+        self.tintColor = button_color
         self.makeApexCorners(withRadius: self.button_size.height)
+        self.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
         
     }
     
@@ -95,3 +101,25 @@ extension APXButton {
     }
 }
 
+extension APXButton {
+    @objc
+    func buttonHandler(_ completion: @escaping () -> Void) {
+        let anim = CASpringAnimation(keyPath: "transform.scale")
+        anim.fromValue = 0.9
+        anim.toValue = 1.1
+        anim.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        anim.autoreverses = true
+        anim.repeatCount = 0
+        anim.duration = 1
+        
+        self.layer.add(anim, forKey: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.handler()
+        }
+    }
+    
+    @objc
+    func handler() {
+        self.button_action_to_perform()
+    }
+}
