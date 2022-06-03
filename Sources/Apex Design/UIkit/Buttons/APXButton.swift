@@ -104,15 +104,32 @@ extension APXButton {
 extension APXButton {
     @objc
     func buttonHandler(_ completion: @escaping () -> Void) {
-        let anim = CASpringAnimation(keyPath: "transform.scale")
-        anim.fromValue = 0.9
-        anim.toValue = 1.1
-        anim.timingFunction = CAMediaTimingFunction(name: .easeIn)
-        anim.autoreverses = true
-        anim.repeatCount = 0
-        anim.duration = 1
+//        let anim = CASpringAnimation(keyPath: "transform.scale")
+//        anim.fromValue = 0.9
+//        anim.toValue = 1.1
+//        anim.timingFunction = CAMediaTimingFunction(name: .easeIn)
+//        anim.autoreverses = true
+//        anim.repeatCount = 0
+//        anim.duration = 1
+//
+//        self.layer.add(anim, forKey: nil)
         
-        self.layer.add(anim, forKey: nil)
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
+        gradientLayer.locations = [0, 0.5, 1]
+        gradientLayer.frame = self.frame
+        
+        let angle = 45 * CGFloat.pi / 180
+        gradientLayer.transform = CATransform3DMakeRotation(angle, 0, 0, 1)
+        self.layer.mask = gradientLayer
+        
+        let ani = CABasicAnimation(keyPath: "transform.translation.x")
+        ani.duration = 0.6
+        ani.fromValue = -view.frame.width
+        ani.toValue = view.frame.width
+        ani.repeatCount = 2
+        
+        gradientLayer.add(ani, forKey: "Some key")
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.handler()
         }
