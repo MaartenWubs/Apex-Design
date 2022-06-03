@@ -89,7 +89,7 @@ extension APXButton {
             self.heightAnchor.constraint(equalToConstant: self.button_size.height),
             self.widthAnchor.constraint(equalToConstant: self.button_size.width)
         ])
-        self.tintColor = button_color
+        self.backgroundColor = button_color
         self.makeApexCorners(withRadius: self.button_size.height)
         self.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
         
