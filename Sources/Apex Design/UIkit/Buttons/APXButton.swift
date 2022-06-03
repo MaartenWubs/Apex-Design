@@ -125,8 +125,8 @@ extension APXButton {
         
         let ani = CABasicAnimation(keyPath: "transform.translation.x")
         ani.duration = 0.6
-        ani.fromValue = -view.frame.width
-        ani.toValue = view.frame.width
+        ani.fromValue = -self.frame.width
+        ani.toValue = self.frame.width
         ani.repeatCount = 2
         
         gradientLayer.add(ani, forKey: "Some key")
