@@ -92,6 +92,7 @@ extension APXButton {
         self.backgroundColor = button_color
         self.makeApexCorners(withRadius: self.button_size.height)
         self.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
+        self.showsTouchWhenHighlighted = true
         
     }
     
@@ -113,23 +114,7 @@ extension APXButton {
 //        anim.duration = 1
 //
 //        self.layer.add(anim, forKey: nil)
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
-        gradientLayer.locations = [0, 0.5, 1]
-        gradientLayer.frame = self.frame
-        
-        let angle = 45 * CGFloat.pi / 180
-        gradientLayer.transform = CATransform3DMakeRotation(angle, 0, 0, 1)
-        self.layer.mask = gradientLayer
-        
-        let ani = CABasicAnimation(keyPath: "transform.translation.x")
-        ani.duration = 0.6
-        ani.fromValue = -self.frame.width
-        ani.toValue = self.frame.width
-        ani.repeatCount = 2
-        
-        gradientLayer.add(ani, forKey: "Some key")
+
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.handler()
         }
