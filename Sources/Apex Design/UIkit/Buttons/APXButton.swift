@@ -63,7 +63,7 @@ public class APXButton: UIButton {
     public init(buttonTitle: String,
                 color: UIColor = .apexDefaultColor,
                 buttonStyle: ApexButtonStyle = .standard,
-                size: CGSize = CGSize(width: 140, height: 40),
+                size: CGSize = CGSize(width: 120, height: 40),
                 action: @escaping (() -> Void)) {
         
         self.button_title = buttonTitle
@@ -82,17 +82,39 @@ public class APXButton: UIButton {
 }
 
 extension APXButton {
+    // MARK: -Make View method
     private func makeView() {
-        translatesAutoresizingMaskIntoConstraints = false
-        self.setTitle(button_title, for: .normal)
-        NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: self.button_size.height),
-            self.widthAnchor.constraint(equalToConstant: self.button_size.width)
-        ])
-        self.backgroundColor = button_color
-        self.makeApexCorners(withRadius: self.button_size.height)
-        self.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
-        self.showsTouchWhenHighlighted = true
+        // --INFO--: Check the design guide for the looks of the button.
+        
+        // The configuration for the standard button.
+        if self.button_style == .standard {
+            translatesAutoresizingMaskIntoConstraints = false
+            self.setTitle(button_title, for: .normal)
+            NSLayoutConstraint.activate([
+                self.heightAnchor.constraint(equalToConstant: self.button_size.height),
+                self.widthAnchor.constraint(equalToConstant: self.button_size.width)
+            ])
+            self.backgroundColor = button_color
+            self.makeApexCorners(withRadius: self.button_size.height)
+            self.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
+            self.showsTouchWhenHighlighted = true // This property is temporary until the TODOs are done
+        }
+        // TODO: Make outlined button
+        else if self.button_style == .outlined {
+            
+        }
+        // TODO: Make text button
+        else if self.button_style == .text {
+            
+        }
+        // TODO: Make eleveted Button
+        else if self.button_style == .elevated {
+            
+        }
+        // TODO: Make tonal buttons
+        else if self.button_style == .tonal {
+            
+        }
         
     }
     
@@ -105,16 +127,8 @@ extension APXButton {
 extension APXButton {
     @objc
     func buttonHandler(_ completion: @escaping () -> Void) {
-//        let anim = CASpringAnimation(keyPath: "transform.scale")
-//        anim.fromValue = 0.9
-//        anim.toValue = 1.1
-//        anim.timingFunction = CAMediaTimingFunction(name: .easeIn)
-//        anim.autoreverses = true
-//        anim.repeatCount = 0
-//        anim.duration = 1
-//
-//        self.layer.add(anim, forKey: nil)
-
+        //TODO: Make shimmer affect when button is tapped
+        //TODO: Make inner shadow effect on tap
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             self.handler()
         }
