@@ -120,7 +120,9 @@ extension APXButton {
     
     private func makeViewWithImage() {
         makeView()
-        self.setImage(UIImage(systemName: button_icon!), for: .normal)
+        self.setImage(UIImage(systemName: button_icon!)?.withTintColor(.white,
+                                                                       renderingMode: .alwaysOriginal),
+                      for: .normal)
     }
 }
 
