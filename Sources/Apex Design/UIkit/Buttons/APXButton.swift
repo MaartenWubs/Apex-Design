@@ -127,6 +127,7 @@ extension APXButton {
 }
 
 extension APXButton {
+    //MARK: -Handlers
     @objc
     func buttonHandler(_ completion: @escaping () -> Void) {
         //TODO: Make shimmer affect when button is tapped

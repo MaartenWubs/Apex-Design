@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import UIKit
+import CoreGraphics
+
+public class APXSegmentButton: UISegmentedControl {
+    
+}

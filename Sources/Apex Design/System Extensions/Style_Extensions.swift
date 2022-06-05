@@ -14,6 +14,7 @@ public enum ApexButtonStyle {
     case standard, outlined, text, elevated, tonal
 }
 
+//MARK: -Button View Modifiers
 /// Modifies the view to look like the Standard color filled Apex View
 fileprivate struct ApexFilledViewModifier: ViewModifier {
     
@@ -26,6 +27,48 @@ fileprivate struct ApexFilledViewModifier: ViewModifier {
             .background(accentColor)
             .foregroundColor(.white)
             .apexCornerRadius(size.height)
+    }
+}
+// TODO: Make Outlined Verion
+fileprivate struct ApexOutlinedViewModifier: ViewModifier {
+    
+    var accentColor: Color
+    var size: CGSize
+    
+    func body(content: Content) -> some View {
+        return content
+    }
+}
+
+// TODO: Make Text only version
+fileprivate struct ApexTextViewModifier: ViewModifier {
+    
+    var accentColor: Color
+    
+    func body(content: Content) -> some View {
+        return content
+    }
+}
+
+// TODO: Make elevated version
+fileprivate struct ApexElevatedViewModifier: ViewModifier {
+    
+    var accentColor: Color
+    var size: CGSize
+    
+    func body(content: Content) -> some View {
+        return content
+    }
+}
+
+// TODO: Make tonal version
+fileprivate struct ApexTonalViewModifier: ViewModifier {
+    
+    var accentColor: Color
+    var size: CGSize
+    
+    func body(content: Content) -> some View {
+        return content
     }
 }
 
@@ -51,6 +94,29 @@ extension View {
         ModifiedContent(content: self,
                         modifier: ApexFilledViewModifier(accentColor: accentColor,
                                                          size: size))
+    }
+    
+    public func apexOultinedStyle(withColor accentColor: Color = .apexDefaultColor, size: CGSize) -> some View {
+        ModifiedContent(content: self,
+                        modifier: ApexOutlinedViewModifier(accentColor: accentColor,
+                                                           size: size))
+    }
+    
+    public func apexTextOnlyStyle(withColor accentColor: Color = .apexDefaultColor) -> some View {
+        ModifiedContent(content: self,
+                        modifier: ApexTextViewModifier(accentColor: accentColor))
+    }
+    
+    public func apexElevetadStyle(withColor accentColor: Color = .apexDefaultColor, size: CGSize) -> some View {
+        ModifiedContent(content: self,
+                        modifier: ApexElevatedViewModifier(accentColor: accentColor,
+                                                           size: size))
+    }
+    
+    public func apexTonalStyle(withColor accentColor: Color = .apexDefaultColor, size: CGSize) -> some View {
+        ModifiedContent(content: self,
+                        modifier: ApexTonalViewModifier(accentColor: accentColor,
+                                                        size: size))
     }
     
     /// This modifier can be used to get the Apex Design style corners. You provide the height of your view
